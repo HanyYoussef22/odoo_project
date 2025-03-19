@@ -1,74 +1,88 @@
 <odoo>
     <data>
-         <record id="student_tree_view" model="ir.ui.view">
-            <field name="name">Student tree view</field>
+        <!-- Define the tree view for iti.student -->
+        <record id="view_patient_tree" model="ir.ui.view">
+            <field name="name">iti.student.tree</field>
             <field name="model">iti.student</field>
             <field name="arch" type="xml">
-                    <tree>
-                        <field name="name"/>
-                        <field name="birth_date"/>
-                        <field name="email"/>
-                        <field name="salary"/>
-                        <field name ="tax"/>
-                        <field name="state"/>
-                        <field name="gender"/>
-                        <field name="address"/>
-                    </tree>
+                <tree>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="birth_date"/>
+                    <field name="salary"/>
+                    <field name="address"/>
+
+                </tree>
             </field>
-         </record>
-        <record id="student_form_view" model="ir.ui.view">
-            <field name="name">Student form view</field>
+        </record>
+        <record id="view_student_form" model="ir.ui.view">
+            <field name="name">iti.student.form</field>
             <field name="model">iti.student</field>
             <field name="arch" type="xml">
                 <form>
-                    <header>
-                        <button string="set first interview" type="object" name="change_state"
-                        attrs="{'invisible':[('state','!=','applied')]}"/>
-                        <button string="set second interview" type="object" states="first" name="change_state"/>
-                        <button string="pass" type="object" states="second" name="set_pass"/>
-                        <button string="rejected" type="object" states="second" name="set_reject"/>
-                        <button string="back to applied" type="object" states="passed,rejected" name="change_state"/>
-                    </header>
                     <sheet>
-                     <group>
-                      <group string="Basic info">
-                          <field name="name"/>
-                          <field name="email"/>
-                          <field name="birth_date" attrs="{'invisible':[('gender','=','m')]}"/>
-                          <field name="salary"/>
-                          <field name="tax"/>
-                          <field name="state"/>
-                          <field name="gender"/>
-                      </group>
-                        <group string="Iti info">
-                    <field name="accepted"/>
-                    <field name="image" widget="image"/>
-                    <field name="login_time"/>
-                            <field name="track_id" domain="[('is_open','=',True)]"/>
-                            <field name="skills_id" widget="many2many_tags"/>
-                            <field name="track_capacity"/>
+                        <group>
+                            <group string="Personal Information">
+                                <field name="name"/>
+                                <field name="age"/>
+                                <field name="gender"/>
+<!--                                       attrs="{'invisible':[('gender','=','f')]}"-->
+
+                                <field name="birth_date"/>
+                                <field name="track_id" domain="[('isOpen','=','True')]"/>
+                                 <field name="track_capacity"/>
+
+                            </group>
+                            <group string="Other Information">
+                                <field name="skills_id" widget="many2many_tags"/>
+                                <field name="image" widget="image"/>
+                                <field name="salary"/>
+
+                            </group>
                         </group>
-                    </group>
-                    <notebook>
-                        <page string="cv">
-                          <field name="cv"/>
-                        </page>
-                        <page string="address">
-                             <field name="address"/>
-                        </page>
-                        <page string="grad">
-                            <field name="grad_id"/>
-                        </page>
-                    </notebook>
+                        <notebook>
+                            <page string="cv">
+                                <group>
+                                    <field name="cv"/>
+                                </group>
+                            </page>
+                            <page string="address">
+                                <field name="address"/>
+                            </page>
+                            <page string="courses">
+                                <field name="student_grade_id">
+                                    <tree>
+                                        <field name="course_id"/>
+                                        <field name="degree"/>
+                                        <field name="student_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
-       <record id="students_action" model="ir.actions.act_window">
-        <field name="name">Students</field>
-        <field name="res_model">iti.student</field>
-       </record>
-        <menuitem id="iti_root" name="ITI"/>
-        <menuitem id="iti_student_menu" name="stu" parent="iti_root" action="students_action"/>
+
+        <record id="student_action" model="ir.actions.act_window">
+            <field name="name">student_name</field>
+            <field name="res_model">iti.student</field>
+        </record>
+  
+        <!-- Menu item without parent & action -->
+        <menuitem id="student_root" name="ITI Student"/>
+        <!-- Menu item with parent & action -->
+        <menuitem id="student_menu" name="student" parent="student_root" action="student_action"/>
     </data>
 </odoo>
+
+<!--"""-->
+<!--attrs="{'readonly':['|',('','','')],   or 'readonly':[('','',''),('','','')], and-->
+
+<!--https://stackoverflow.com/questions/48523138/i-don%C2%B4t-understand-normal-polish-notation-npn-or-pn-how-to-build-a-complex-do-->
+
+
+<!--         'invisible':[('','','')],-->
+<!--         'required':[('','','')],-->
+
+<!--"""-->
