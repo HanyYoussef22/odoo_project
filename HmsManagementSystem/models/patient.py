@@ -1,8 +1,8 @@
 from odoo import  models , fields
 
 
-class HmsManagementSystem(models.Model):
-    _name = "hms.management.system"
+class Patient(models.Model):
+    _name = "hms.patient.system"
     _description = "Hospital Management System"
 
     fname = fields.Char()
