@@ -13,6 +13,47 @@
             </field>
         </record>
 
+        <record id="view_patient_form" model="ir.ui.view">
+            <field name="name">hms.patient.form</field>
+            <field name="model">hms.patient.system</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="fname"/>
+                            <field name="lname"/>
+                            <field name="birthday"/>
+                            <field name="cr_ratio"/>
+
+                            <field name="age"/>
+                        </group>
+                        <group>
+
+                            <field name="pcr"/>
+                             <field name="image_upload"/>
+                            <field name="doctor_id"/>
+                            <field name="department_id" domain="[('is_opened','=','True')]" />
+                            <field name="department_capacity"/>
+
+                        </group>
+                        <notebook>
+                            <page string="address">
+                                <group>
+                                    <field name="address"/>
+                                </group>
+                            </page>
+                            <page string="history">
+                                <group>
+                                    <field name="history"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
         <record id="patients_action" model="ir.actions.act_window">
             <field name="name">Patient_name</field>
             <field name="res_model">hms.patient.system</field>
