@@ -17,30 +17,15 @@ class Patient(models.Model):
     image_upload = fields.Binary()
     address = fields.Char()
     age = fields.Integer()
-    doctor_id = fields.Many2many('hms.doctor', readonly=True)
+    doctor_ids = fields.Many2many('hms.doctor')
     department_id = fields.Many2one('hms.dp')
     department_capacity = fields.Integer(related="department_id.capacity")
+    log_history_ids =  fields.One2many('log.history','patient_ids')
 
 
-
-
-    @api.onchange('department_id')
-    def _onchange_department_id(self):
-        if self.department_id:
-            self.doctor_id = [(6, 0, self.department_id.doctor_ids.ids)]
-            self.doctor_id.readonly = False
-        else:
-            self.doctor_id = [(5, 0, 0)]
-            self.doctor_id.readonly = True
-
-    @api.onchange('pcr')
-    def _onchange_pcr(self):
-        self.cr_ratio.required = self.pcr
 
     @api.onchange('age')
     def _onchange_age(self):
-        if self.age < 50:
-            self.history = False
         if self.age < 30:
             self.pcr = True
             return {

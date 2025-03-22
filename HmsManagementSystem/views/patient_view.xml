@@ -23,7 +23,7 @@
                             <field name="fname"/>
                             <field name="lname"/>
                             <field name="birthday"/>
-                            <field name="cr_ratio"/>
+                            <field name="cr_ratio" attrs="{'required': [('pcr', '=', True)]}"/>
 
                             <field name="age"/>
                         </group>
@@ -31,7 +31,8 @@
 
                             <field name="pcr"/>
                              <field name="image_upload"/>
-                            <field name="doctor_id"/>
+                           <field name="doctor_ids" attrs="{'readonly': [('department_id', '=', False)]}"/>
+
                             <field name="department_id" domain="[('is_opened','=','True')]" />
                             <field name="department_capacity"/>
 
@@ -44,7 +45,7 @@
                             </page>
                             <page string="history">
                                 <group>
-                                    <field name="history"/>
+                                    <field name="history" attrs="{'invisible': [('age', '&lt;', '50')]}"/>
                                 </group>
                             </page>
                         </notebook>

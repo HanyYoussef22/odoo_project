@@ -1,8 +1,6 @@
 <odoo>
     <data>
 
-
-
         <record id="department_action" model="ir.actions.act_window">
             <field name="name">Department</field>
             <field name="res_model">hms.dp</field>
