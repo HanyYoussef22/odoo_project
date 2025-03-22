@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+        <record id="department_action" model="ir.actions.act_window">
+            <field name="name">Department</field>
+            <field name="res_model">hms.dp</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_patient_tree"/>
+        </record>
+
+
+        <menuitem id="hms_department_menu" name="Department" parent="hms_root" action="department_action"/>
+    </data>
+</odoo>

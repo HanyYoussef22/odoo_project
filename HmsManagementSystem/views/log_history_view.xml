@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+
+
+        <record id="log_history_action" model="ir.actions.act_window">
+            <field name="name">Log History</field>
+            <field name="res_model">log.history</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="log_history_menu" name="Log History" parent="hms_root" action="log_history_action"/>
+
+    </data>
+</odoo>
