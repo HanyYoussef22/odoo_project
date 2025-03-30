@@ -8,5 +8,5 @@ class Doctor(models.Model):
     first_name = fields.Char()
     last_name = fields.Char()
     image = fields.Binary()
-    patient_id = fields.One2many('hms.patient.system','doctor_ids')
+    patient_ids = fields.One2many('hms.patient.system','doctor_ids')
 
